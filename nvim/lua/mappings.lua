@@ -4,6 +4,8 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+map("x", ">", ">gv", { noremap = true, silent = true, desc = "Indent right" }) -- keep visual selection after indenting
+map("x", "<", "<gv", { noremap = true, silent = true, desc = "Indent left" }) -- keep visual selection after indenting
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "j" , "gj", { desc = "Move down by visual line" })
 map("n", "k" , "gk", { desc = "Move up by visual line" })
