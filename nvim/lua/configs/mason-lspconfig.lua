@@ -9,10 +9,11 @@ local servers = {
     "cssls",
     "biome",
     "ts_ls",
-	"rust_analyzer",
+    "tailwindcss",
+    "rust_analyzer",
     -- "eslint",
     "clangd",
-    "jdtls",
+    -- "jdtls",
 }
 
 require("mason-lspconfig").setup {
@@ -38,9 +39,9 @@ local ignore_install = {}
 -- -- Filter the list based on ignore list
 -- local all_servers = {}
 -- for _, s in ipairs(servers) do
-    --     if not table_contains(ignore_install, s) then
-        -- table.insert(all_servers, s)
-    --     end
+--     if not table_contains(ignore_install, s) then
+-- table.insert(all_servers, s)
+--     end
 -- end
 --
 -- require("mason-lspconfig").setup {

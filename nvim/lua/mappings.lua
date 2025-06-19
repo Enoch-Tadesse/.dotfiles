@@ -7,19 +7,36 @@ local map = vim.keymap.set
 map("x", ">", ">gv", { noremap = true, silent = true, desc = "Indent right" }) -- keep visual selection after indenting
 map("x", "<", "<gv", { noremap = true, silent = true, desc = "Indent left" }) -- keep visual selection after indenting
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("n", "j" , "gj", { desc = "Move down by visual line" })
-map("n", "k" , "gk", { desc = "Move up by visual line" })
+map("n", "j", "gj", { desc = "Move down by visual line" })
+map("n", "k", "gk", { desc = "Move up by visual line" })
 map("n", "<C-p>", "<CMD>put +<CR>", { noremap = true, silent = true, desc = "Paste from clipboard" })
 map("i", "jk", "<ESC>")
-map("i", "<A-l>", "<ESC>ll", {noremap = true, silent = true, desc = "Move to the end of the line in insert mode"})
+map("i", "<A-l>", "<ESC><right><right>", { noremap = true, silent = true, desc = "Move right in insert mode" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
--------------------------Copilot_________________________
+-------------------------diagnostics --------------------------
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+
+-- Open a floating window with diagnostic details
+map("n", "<leader>dg", vim.diagnostic.open_float, { noremap = true, silent = true, desc = "Open diagnostic float" })
+
+-- Jump to the location list (all diagnostics)
+map(
+    "n",
+    "<leader>q",
+    vim.diagnostic.setloclist,
+    { noremap = true, silent = true, desc = "See location list with diagnostics" }
+)
+
+-------------------------diagnostics --------------------------
+
+-------------------------Copilot--------------------------
 map("i", "<C-Space>", function()
-  require("copilot.suggestion").accept()
+    require("copilot.suggestion").accept()
 end, { noremap = true, silent = true })
--------------------------Copilor_________________________
+-------------------------Copilot-------------------------
 
 ----------------------Terminal-----------------------
 map({ "n", "t" }, "<A-i>", function()
@@ -92,7 +109,7 @@ map("n", "<leader>tw", ":Gitsigns toggle_word_diff<CR>")
 
 map("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-map("n", "<leader>x", "<CMD>bd<CR>", { noremap = true, silent = true, desc = "Close current buffer" })
+map("n", "<leader>x", "<CMD>bnext<bar>bd#<CR>", { noremap = true, silent = true, desc = "Close current buffer" })
 
 map("n", "<leader>/", "gcc", { remap = true, silent = true, desc = "Toggle comment" })
 map("v", "<leader>/", "gc", { remap = true, silent = true, desc = "Toggle comment" })
@@ -100,11 +117,9 @@ map("v", "<leader>/", "gc", { remap = true, silent = true, desc = "Toggle commen
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
-map("x", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true }) -- restrict the motion to visual mode only, excluding selection mode
+-- consistent block moving up and down
+map("x", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 map("x", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
-
-map("n", "J", ":m .+1<CR>==", { noremap = true, silent = true })
-map("n", "K", ":m .-2<CR>==", { noremap = true, silent = true })
 
 map("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 map("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })

@@ -31,10 +31,12 @@ return {
                 keymap = {
                     accept = "<C-Space>", -- already handled above
                 },
-				filetypes = {
-					rust = false, -- disable copilot for Rust files
-					python = false, -- disable copilot for Python files
-				}
+                filetypes = {
+                    rust = false, -- disable copilot for Rust files
+                    python = false, -- disable copilot for Python files
+                    go = false,
+                    html = false,
+                },
             }
         end,
     },
@@ -210,7 +212,7 @@ return {
         opts = {
             ui = {
                 border = "single",
-                diff_mode = true,
+                diff_mode = false,
             },
         },
     },
@@ -257,20 +259,20 @@ return {
         end,
     },
 
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-path" },
-            { "hrsh7th/cmp-cmdline" },
-            { "L3MON4D3/LuaSnip" },
-            { "saadparwaiz1/cmp_luasnip" },
-        },
-        config = function()
-            require "configs.nvim-cmp"
-        end,
-    },
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     dependencies = {
+    --         { "hrsh7th/cmp-nvim-lsp" },
+    --         { "hrsh7th/cmp-buffer" },
+    --         { "hrsh7th/cmp-path" },
+    --         { "hrsh7th/cmp-cmdline" },
+    --         { "L3MON4D3/LuaSnip" },
+    --         { "saadparwaiz1/cmp_luasnip" },
+    --     },
+    --     config = function()
+    --         require "configs.nvim-cmp"
+    --     end,
+    -- },
 
     {
         "zapling/mason-conform.nvim",

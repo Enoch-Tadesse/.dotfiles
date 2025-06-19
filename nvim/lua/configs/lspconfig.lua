@@ -42,6 +42,38 @@ require("lspconfig").jdtls.setup {
     ft = { "java" },
 }
 
+-- tailwind
+lspconfig.tailwindcss.setup {
+    filetypes = {
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "svelte",
+        "vue",
+    },
+    init_options = {
+        userLanguages = {
+            eelixir = "html-eex",
+            eruby = "erb",
+            heex = "phoenix-heex",
+        },
+    },
+    settings = {
+        tailwindCSS = {
+            experimental = {
+                classRegex = {
+                    -- for classnames inside arbitrary formats like `cn("bg-red-500")`
+                    { "cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                },
+            },
+        },
+    },
+}
+
 -- local jdkPath = "/usr/lib/jvm/jdk-24.0.1/"
 -- require("lspconfig").jdtls.setup {
 -- settings = {
@@ -68,7 +100,7 @@ lspconfig.pyright.setup {
     settings = {
         python = {
             -- make sure to source the activate in bashrc
-            pythonPath = "/home/henok/global/bin/python", -- path to your exe ven python
+            -- pythonPath = "/home/henok/Desktop/Neuro-Symbolic-AI/yon/bin/activate",
             analysis = {
                 typeCheckingMode = "basic", -- or "off" for even less strictness
                 diagnosticSeverityOverrides = {

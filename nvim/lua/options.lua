@@ -19,7 +19,7 @@ require "nvchad.options"
 vim.opt.completeopt = { "menuone", "noselect" } -- shows menu even if it is one and the first choice is not auto selected
 vim.opt.fileencoding = "utf-8" -- default is utf-8 but just making sure
 vim.opt.showmode = false -- show current mode at the bottom
-vim.opt.title = true -- set terminal title
+-- vim.opt.title = true -- set terminal title
 vim.opt.incsearch = true -- incremental search -- shows matches as you type
 -- vim.opt.syntax = "on" -- enable syntax highlighting
 
