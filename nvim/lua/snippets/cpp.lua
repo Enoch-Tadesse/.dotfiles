@@ -12,6 +12,7 @@ ls.add_snippets("cpp", {
 
     s("mo", {
         t {
+			"ll curL = 0, curR = -1",
             "for (auto& [l, r, index] : query) {",
             "    while (curR < r) add(++curR);",
             "    while (curR > r) remove(curR--);",
