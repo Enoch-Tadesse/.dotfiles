@@ -1,3 +1,4 @@
+
 --[[
   Custom LSP hover function that opens a floating window
   showing documentation which stays open until you move cursor
@@ -36,7 +37,7 @@ local function hover_sticky()
     end)
 end
 
--- local lspconfig = require "lspconfig"
+local lspconfig = require "lspconfig"
 -- local lspconfig = vim.lsp.config
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -58,17 +59,6 @@ local on_attach = function(client, bufnr)
         hover_sticky()
     end, opts)
 end
-
-vim.lsp.enable "jedi_language_server"
-vim.lsp.enable "pyright"
-vim.lsp.enable "html"
-vim.lsp.enable "cssls"
-vim.lsp.enable "gopls"
-vim.lsp.enable "lua_ls"
-vim.lsp.enable "ts_ls"
-vim.lsp.enable "clangd"
-vim.lsp.enable "rust_analyzer"
-vim.lsp.enable "dartls"
 
 -- Set up each language server
 -- lspconfig.biome.setup {
@@ -153,7 +143,7 @@ vim.lsp.enable "dartls"
 -- ft = { "java" },
 -- }
 
-vim.lsp.config("pyright", {
+lspconfig.pyright.setup {
     capabilities = capabilities,
     filetypes = { "python" },
     on_attach = on_attach,
@@ -163,26 +153,27 @@ vim.lsp.config("pyright", {
             -- pythonPath = "/home/henok/Desktop/Neuro-Symbolic-AI/yon/bin/activate",
             pythonPath = "/home/henok/global/bin/python",
             analysis = {
-                typeCheckingMode = "basic",
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
+                typeCheckingMode = "off", -- or "off" for even less strictness
+                diagnosticSeverityOverrides = {
+                    reportIncompatibleMethodOverride = "none", -- <== THIS silences the override warnings
+                },
             },
         },
     },
-})
+}
 
 -- HTML
-vim.lsp.config("html", {
+lspconfig.html.setup {
     capabilities = capabilities,
-})
+}
 
 -- CSS
-vim.lsp.config("cssls", {
+lspconfig.cssls.setup {
     capabilities = capabilities,
-})
+}
 
 -- Go
-vim.lsp.config("gopls", {
+lspconfig.gopls.setup {
     cmd = { "gopls", "-vv", "serve" },
     capabilities = capabilities,
     -- on_attach = on_attach,
@@ -216,10 +207,10 @@ vim.lsp.config("gopls", {
             },
         },
     },
-})
+}
 
 -- Lua
-vim.lsp.config("lua_ls", {
+lspconfig.lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -240,32 +231,32 @@ vim.lsp.config("lua_ls", {
             },
         },
     },
-})
+}
 
--- vim.lsp.config("ts_ls", {
---     capabilities = capabilities,
---     on_attach = function(client, bufnr)
---         -- Disable ts_ls diagnostics (to avoid duplicates with ESLint)
---         client.handlers["textDocument/publishDiagnostics"] = function() end
---         -- Run your own on_attach if you have one
---         if on_attach then
---             on_attach(client, bufnr)
---         end
---     end,
---     cmd = { "typescript-language-server", "--stdio" },
---     init_options = {
---         preferences = {
---             disableSuggestions = false,
---         },
---     },
---     filetypes = {
---         "javascript",
---         "javascriptreact",
---         "typescript",
---         "typescriptreact",
---     },
---     root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
--- })
+lspconfig.ts_ls.setup {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+        -- Disable ts_ls diagnostics (to avoid duplicates with ESLint)
+        client.handlers["textDocument/publishDiagnostics"] = function() end
+        -- Run your own on_attach if you have one
+        if on_attach then
+            on_attach(client, bufnr)
+        end
+    end,
+    cmd = { "typescript-language-server", "--stdio" },
+    init_options = {
+        preferences = {
+            disableSuggestions = false,
+        },
+    },
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    },
+    root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+}
 
 -- TypeScript / JavaScript
 -- lspconfig.ts_ls.setup({
@@ -291,37 +282,26 @@ vim.lsp.config("lua_ls", {
 -- }
 
 -- Clangd
-vim.lsp.config("clangd", {
+lspconfig.clangd.setup {
     capabilities = capabilities,
     on_attach = on_attach,
-})
+}
 
-vim.lsp.config("rust_analyzer", {
+lspconfig.rust_analyzer.setup {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
         ["rust-analyzer"] = {
             cargo = { allFeatures = true },
-            -- experimental = { enable = true },
+            experimental = { enable = true },
             -- check = {
             --     command = "clippy",
             -- },
-            diagnostics = {
-                disabled = { "unlinked-file" },
-            },
-
-            files = {
-                watcher = "server",
-            },
-
-            standalone = {
-                enable = true,
-            },
         },
     },
-})
+}
 
-vim.lsp.config("dartls", {
+lspconfig.dartls.setup {
     cmd = { "dart", "language-server", "--protocol=lsp" },
     filetypes = { "dart" },
     root_dir = function()
@@ -329,13 +309,4 @@ vim.lsp.config("dartls", {
     end,
     capabilities = capabilities,
     on_attach = on_attach,
-})
-
-vim.lsp.config("jedi_language_server",  {
-on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        python = {
-        }
-    }
-})
+}

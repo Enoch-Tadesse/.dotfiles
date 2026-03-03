@@ -16,8 +16,8 @@ map("i", "<A-l>", "<ESC><right><right>", { noremap = true, silent = true, desc =
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -------------------------diagnostics --------------------------
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 
 -- Open a floating window with diagnostic details
 map("n", "<leader>dg", vim.diagnostic.open_float, { noremap = true, silent = true, desc = "Open diagnostic float" })
@@ -29,8 +29,18 @@ map(
     vim.diagnostic.setloclist,
     { noremap = true, silent = true, desc = "See location list with diagnostics" }
 )
+map(
+    "n",
+    "<leader>ca",
+    "<CMD>lua vim.lsp.buf.code_action()<CR>",
+    { noremap = true, silent = true, desc = "Open code action" }
+)
 
 -------------------------diagnostics --------------------------
+
+------------------------CarbonNow-----------------------
+vim.keymap.set("v", "<Space>ss", ":CarbonNow<CR>", { noremap = true, silent = true })
+------------------------CarbonNow-----------------------
 
 -------------------------Copilot--------------------------
 map("i", "<C-Space>", function()
@@ -149,3 +159,20 @@ map("n", "<leader>tgb", ":Telescope git_branches<CR>", { noremap = true, silent 
 map("n", "<leader>tgs", ":Telescope git_status<CR>", { noremap = true, silent = true })
 map("n", "<leader>tgS", ":Telescope git_stash<CR>", { noremap = true, silent = true })
 -----------------------------------Telescope ------------------------------------
+
+-----------------------------------Leetcode ------------------------------------
+
+map("n", "<leader>lm", ":Leet menu<CR>", { noremap = true, silent = true })
+map("n", "<leader>le", ":Leet exit<CR>", { noremap = true, silent = true })
+map("n", "<leader>lc", ":Leet console<CR>", { noremap = true, silent = true })
+map("n", "<leader>li", ":Leet info<CR>", { noremap = true, silent = true })
+map("n", "<leader>ll", ":Leet lang<CR>", { noremap = true, silent = true })
+map("n", "<leader>lt", ":Leet test<CR>", { noremap = true, silent = true })
+map("n", "<leader>ls", ":Leet submit<CR>", { noremap = true, silent = true })
+map("n", "<leader>lo", ":Leet open<CR>", { noremap = true, silent = true })
+map("n", "<leader>ldt", ":Leet desc<CR>", { noremap = true, silent = true })
+map("n", "<leader>lds", ":Leet desc stats<CR>", { noremap = true, silent = true })
+map("n", "<leader>lr", ":Leet random<CR>", { noremap = true, silent = true })
+map("n", "<leader>lb", ":Leet tabs<CR>", { noremap = true, silent = true })
+
+-----------------------------------Leetcode ------------------------------------

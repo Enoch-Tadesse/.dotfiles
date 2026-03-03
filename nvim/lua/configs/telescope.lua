@@ -10,7 +10,7 @@ telescope.setup {
                 ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
             },
         },
-        file_ignore_patterns = { ".git/" }, -- ".cache", "%.o", "%.a", "%.out", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip"
+        file_ignore_patterns = { ".git/", "node_modules/" }, -- ".cache", "%.o", "%.a", "%.out", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip"
     },
     pickers = {
         find_files = { hidden = true },

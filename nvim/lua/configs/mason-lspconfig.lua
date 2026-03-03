@@ -7,11 +7,12 @@ local servers = {
     "lua_ls",
     "html",
     "cssls",
+    "jedi_language_server",
     "biome",
     "ts_ls",
     "tailwindcss",
     "rust_analyzer",
-    -- "eslint",
+    "eslint",
     "clangd",
     -- "jdtls",
 }

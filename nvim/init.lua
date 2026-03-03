@@ -44,6 +44,4 @@ require "configs.telescope"
 require "nvchad.autocmds"
 
 vim.schedule(function()
-    -- require "mappings"
-    -- require "configs.telescope"
 end)
