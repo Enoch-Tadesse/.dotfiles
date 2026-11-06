@@ -1,6 +1,10 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
+-- Isolated Neovim Python Provider (for Molten, remote plugins)
+vim.g.python3_host_prog = vim.fn.expand "~/.virtualenvs/neovim/bin/python3"
+vim.g.loaded_python3_provider = nil
+
 ------------------------uncomment for trash windows ------------------------------------
 
 -- local joinpath = vim.fs and vim.fs.joinpath or function(...) return table.concat({...}, "/") end

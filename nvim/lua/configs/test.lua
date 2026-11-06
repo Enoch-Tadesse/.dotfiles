@@ -151,7 +151,8 @@ lspconfig.pyright.setup {
         python = {
             -- make sure to source the activate in bashrc
             -- pythonPath = "/home/henok/Desktop/Neuro-Symbolic-AI/yon/bin/activate",
-            pythonPath = "/home/henok/global/bin/python",
+            -- pythonPath = "/home/henok/global/bin/python",
+			pythonPath = "/home/henok/Documents/ML/bottleneck/.venv/bin/python3",
             analysis = {
                 typeCheckingMode = "off", -- or "off" for even less strictness
                 diagnosticSeverityOverrides = {

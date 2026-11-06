@@ -1,7 +1,8 @@
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter").setup {
     ensure_installed = {
-        -- "bash",
+        "bash",
         "c",
+		"php",
         -- "cmake",
         "cpp",
         "make",
@@ -20,11 +21,16 @@ require("nvim-treesitter.configs").setup {
         -- "luadoc",
         "markdown",
         "markdown_inline",
+        "latex",
+        "toml",
+        "yaml",
+        "dart",
         -- "printf",
         -- "toml",
         "vim",
         -- "vimdoc",
         -- "yaml",
+        "blade",
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)

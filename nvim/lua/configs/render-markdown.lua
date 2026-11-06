@@ -1,0 +1,58 @@
+require("render-markdown").setup {
+    heading = {
+        enabled = true,
+        sign = true,
+        icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+    },
+    code = {
+        enabled = true,
+        sign = false,
+        style = "full",
+        position = "left",
+        language_pad = 0,
+        disable_background = { "diff" },
+        width = "full",
+        left_pad = 0,
+        right_pad = 0,
+        min_width = 0,
+        border = "thin",
+        above = "▄",
+        below = "▀",
+        highlight = "RenderMarkdownCode",
+        highlight_inline = "RenderMarkdownCodeInline",
+    },
+    dash = {
+        enabled = true,
+        icon = "─",
+        width = "full",
+    },
+    bullet = {
+        enabled = true,
+        icons = { "●", "○", "◆", "◇" },
+    },
+    checkbox = {
+        enabled = true,
+        unchecked = { icon = "󰄱 " },
+        checked = { icon = "󰄵 " },
+    },
+    pipe_table = {
+        enabled = true,
+        preset = "round",
+        style = "full",
+        cell = "padded",
+    },
+    callout = {
+        note = { raw = "[!NOTE]", rendered = "󰋽 Note", highlight = "RenderMarkdownInfo" },
+        tip = { raw = "[!TIP]", rendered = "󰌶 Tip", highlight = "RenderMarkdownSuccess" },
+        important = { raw = "[!IMPORTANT]", rendered = "󰅾 Important", highlight = "RenderMarkdownHint" },
+        warning = { raw = "[!WARNING]", rendered = "󰀪 Warning", highlight = "RenderMarkdownWarn" },
+        caution = { raw = "[!CAUTION]", rendered = "󰳦 Caution", highlight = "RenderMarkdownError" },
+    },
+    latex = {
+        enabled = true,
+        converter = "latex2text",
+        highlight = "RenderMarkdownMath",
+        top_pad = 0,
+        bottom_pad = 0,
+    },
+}

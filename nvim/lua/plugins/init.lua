@@ -134,15 +134,7 @@ return {
         end,
     },
 
-    {
-        "MeanderingProgrammer/markdown.nvim",
-        name = "render-markdown", -- must be this name
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-        ft = "markdown",
-        config = function()
-            require("render-markdown").setup {}
-        end,
-    },
+
 
     {
         "kylechui/nvim-surround",
@@ -327,6 +319,13 @@ return {
     },
 
     {
+        "numToStr/FTerm.nvim",
+        config = function()
+            require "configs.terminal"
+        end,
+    },
+
+    {
         "folke/which-key.nvim",
         event = "VimEnter",
         opts = {
@@ -345,12 +344,7 @@ return {
         },
     },
 
-    {
-        "numToStr/FTerm.nvim",
-        config = function()
-            require "configs.terminal"
-        end,
-    },
+
 
     -- { -- Codeforces Assistant
     --     "A7lavinraj/assistant.nvim",
@@ -525,6 +519,7 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter",
+		branch = "master",
         build = ":TSUpdate",
         config = function()
             require "configs.treesitter"
@@ -533,7 +528,7 @@ return {
 
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
+        -- tag = "0.1.8",
         cmd = "Telescope", -- Lazy-load on :Telescope command
         lazy = false,
         keys = {
@@ -551,12 +546,7 @@ return {
         end,
     },
 
-    {
-        "numToStr/FTerm.nvim",
-        config = function()
-            require "configs.terminal"
-        end,
-    },
+
 
     {
         "nvim-tree/nvim-tree.lua",

@@ -176,3 +176,48 @@ map("n", "<leader>lr", ":Leet random<CR>", { noremap = true, silent = true })
 map("n", "<leader>lb", ":Leet tabs<CR>", { noremap = true, silent = true })
 
 -----------------------------------Leetcode ------------------------------------
+
+-----------------------------------Python & ML Development ------------------------------------
+map("n", "<leader>pr", function()
+    local file = vim.fn.expand "%:p"
+    local venv_mod = require "configs.venv-autodetect"
+    local _, py_bin = venv_mod.find_venv(vim.fn.getcwd())
+    py_bin = py_bin or (vim.env.VIRTUAL_ENV and vim.env.VIRTUAL_ENV .. "/bin/python") or "python3"
+    require("FTerm").scratch { cmd = { py_bin, file } }
+end, { desc = "Run current Python file in floating terminal" })
+
+map("n", "<leader>pi", function()
+    local venv_mod = require "configs.venv-autodetect"
+    local _, py_bin = venv_mod.find_venv(vim.fn.getcwd())
+    local ipy = (vim.env.VIRTUAL_ENV and vim.env.VIRTUAL_ENV .. "/bin/ipython")
+        or (py_bin and py_bin:gsub("python$", "ipython"))
+        or "ipython"
+    if vim.fn.executable(ipy) == 1 then
+        require("FTerm").scratch { cmd = { ipy } }
+    else
+        require("FTerm").scratch { cmd = { py_bin or "python3" } }
+    end
+end, { desc = "Open interactive Python/IPython terminal" })
+
+map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { noremap = true, silent = true, desc = "Toggle Markdown Preview" })
+
+-- Which-key group labels
+local ok_wk, wk = pcall(require, "which-key")
+if ok_wk then
+    pcall(function()
+        wk.add {
+            { "<leader>p", group = "Python" },
+            { "<leader>v", group = "VirtualEnv" },
+            { "<leader>d", group = "Debug (DAP)" },
+            { "<leader>t", group = "Test (Neotest)" },
+            { "<leader>m", group = "Molten / Markdown" },
+            { "<leader>r", group = "REPL (Iron)" },
+            { "<leader>j", group = "Jupyter / Notebook" },
+            { "<leader>g", group = "Git" },
+            { "<leader>f", group = "Find / Format" },
+            { "<leader>c", group = "Code Action / Snap" },
+            { "<leader>l", group = "LeetCode" },
+        }
+    end)
+end
+-----------------------------------Python & ML Development ------------------------------------

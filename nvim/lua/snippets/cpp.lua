@@ -12,7 +12,7 @@ ls.add_snippets("cpp", {
 
     s("mo", {
         t {
-			"ll curL = 0, curR = -1",
+            "ll curL = 0, curR = -1",
             "for (auto& [l, r, index] : query) {",
             "    while (curR < r) add(++curR);",
             "    while (curR > r) remove(curR--);",
@@ -595,6 +595,43 @@ ls.add_snippets("cpp", {
         },
     }),
 
+    s("bridges", {
+        t {
+            "vll low(n, LLONG_MAX), ids(n, -1);",
+            "umap<ll, vll> adj;",
+            "ll timer = 0;",
+            "vector<vll> ans;",
+            "",
+            "for (auto &[a, b] : connections) {",
+            "    adj[a].push_back(b);",
+            "    adj[b].push_back(a);",
+            "}",
+            "",
+            "function<void(ll, ll)> dfs = [&](ll curr, ll par) {",
+            "    low[curr] = ids[curr] = timer++;",
+            "",
+            "    for (ll nei : adj[curr]) {",
+            "        if (ids[nei] == -1) {",
+            "            dfs(nei, curr);",
+            "            low[curr] = min(low[curr], low[nei]);",
+            "",
+            "            if (low[nei] > ids[curr]) {",
+            "                ans.push_back({nei, curr});",
+            "            }",
+            "        } else if (nei != par) {",
+            "            low[curr] = min(low[curr], ids[nei]);",
+            "        }",
+            "    }",
+            "};",
+            "",
+            "for (int i = 0; i < n; i++) {",
+            "    if (ids[i] == -1) dfs(i, -1);",
+            "}",
+            "",
+            "return ans;",
+        },
+    }),
+
     s("seg_mod", {
         t {
             "typedef vector<ll> vl;",
@@ -674,6 +711,7 @@ ls.add_snippets("cpp", {
             "};",
         },
     }),
+
     s("fast", {
         t {
             "#include <bits/stdc++.h>",

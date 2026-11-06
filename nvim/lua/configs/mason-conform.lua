@@ -8,6 +8,7 @@ require("mason-conform").setup {
         "clang-format", -- C/C++ formatter
         "prettier", -- JS/TS/HTML formatter
         "gopls", -- Go language server (if you need LSP formatting)
+        "blade-formatter", -- Blade formatter
     },
     automatic_installation = true, -- Automatically install missing tools
 }

@@ -24,15 +24,6 @@ local postfix = require("luasnip.extras.postfix").postfix
 local types = require "luasnip.util.types"
 local parse = require("luasnip.util.parser").parse_snippet
 
-ls.add_snippets("go", {
-    s("importm", {
-        t {
-            "import 'package:flutter/material.dart';'",
-        },
-        t { "" },
-    }),
-})
-
 return {
     s(
         { trig = "stless", name = "Stateless Widget", dscr = "Creates a Stateless Widget" },
@@ -54,9 +45,11 @@ return {
             }
         )
     ),
-    s { trig = "importm", fmt [[ 
-	import 'package:flutter/material.dart';
-  ]] },
+
+    s(
+        { trig = "importm", name = "Import Material", dscr = "Import flutter material package" },
+        t { "import 'package:flutter/material.dart';", "" }
+    ),
 
     s(
         { trig = "stful", name = "Stateful Widget", dscr = "Creates a Stateful Widget" },

@@ -1,5 +1,20 @@
 require "nvchad.options"
 
+-- Dedicated, isolated Python provider for Neovim (molten, remote plugins)
+vim.g.python3_host_prog = vim.fn.expand "~/.virtualenvs/neovim/bin/python3"
+vim.g.loaded_python3_provider = nil
+
+-- Code folding settings (nvim-ufo)
+vim.o.foldcolumn = "1"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- Setup project-specific virtual environment autodetector
+pcall(function()
+    require("configs.venv-autodetect").setup()
+end)
+
 -- add yours here!
 
 -- local o = vim.o
@@ -10,13 +25,54 @@ require "nvchad.options"
 -- vim.api.nvim_create_autocmd("BufReadPost", {
 --   pattern = "*",
 --   callback = function()
---     vim.cmd("syntax off")
+    -- vim.cmd("syntax off")
 --   end,
 -- })
 
 local group = vim.api.nvim_create_augroup("AutoSave", { clear = true })
 
 -- vim.cmd("syntax off")
+
+
+-- php --------------------
+vim.api.nvim_create_user_command("PhpLive", function()
+  local cwd = vim.fn.getcwd()
+
+  -- Start PHP server
+  vim.fn.jobstart({
+    "php",
+    "-S",
+    "localhost:8000",
+  }, {
+    cwd = cwd,
+    detach = true,
+  })
+
+  -- Start BrowserSync
+  vim.fn.jobstart({
+    "browser-sync",
+    "start",
+    "--proxy",
+    "localhost:8000",
+    "--files",
+    "*.php,*.css,*.js,**/*.php,**/*.css,**/*.js"
+  }, {
+    cwd = cwd,
+    detach = true,
+  })
+
+  -- Open browser
+  vim.fn.jobstart({
+    "xdg-open",
+    "http://localhost:3000",
+  }, {
+    detach = true,
+  })
+
+  print("PHP live reload running at http://localhost:3000")
+end, {})
+
+-- php --------------------
 
 -- rust pub mod adding for CF
 vim.api.nvim_create_autocmd("BufNewFile", {
@@ -77,7 +133,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.tabstop = 2
         vim.opt_local.shiftwidth = 2
         vim.opt_local.softtabstop = 2
-        vim.opt_local.expandtab = 2
+        vim.opt_local.expandtab = true
     end,
 })
 

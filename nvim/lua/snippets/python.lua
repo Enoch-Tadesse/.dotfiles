@@ -616,4 +616,109 @@ ls.add_snippets("python", {
             "",
         },
     }),
+
+    -- Machine Learning & Data Science Snippets
+    s("cell", {
+        t {
+            "# %%",
+            "",
+        },
+        i(0),
+    }),
+
+    s("torch_device", {
+        t {
+            "device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')",
+            "print(f'Using device: {device}')",
+        },
+        i(0),
+    }),
+
+    s("torch_model", {
+        t {
+            "import torch",
+            "import torch.nn as nn",
+            "",
+            "class Model(nn.Module):",
+            "    def __init__(self, in_features, out_features):",
+            "        super().__init__()",
+            "        self.net = nn.Sequential(",
+            "            nn.Linear(in_features, 128),",
+            "            nn.ReLU(),",
+            "            nn.Dropout(0.2),",
+            "            nn.Linear(128, out_features),",
+            "        )",
+            "",
+            "    def forward(self, x):",
+            "        return self.net(x)",
+        },
+        i(0),
+    }),
+
+    s("torch_dataset", {
+        t {
+            "from torch.utils.data import Dataset, DataLoader",
+            "",
+            "class CustomDataset(Dataset):",
+            "    def __init__(self, data, targets):",
+            "        self.data = data",
+            "        self.targets = targets",
+            "",
+            "    def __len__(self):",
+            "        return len(self.data)",
+            "",
+            "    def __getitem__(self, idx):",
+            "        return self.data[idx], self.targets[idx]",
+        },
+        i(0),
+    }),
+
+    s("torch_train", {
+        t {
+            "def train_epoch(model, dataloader, criterion, optimizer, device):",
+            "    model.train()",
+            "    total_loss = 0.0",
+            "    for batch_x, batch_y in dataloader:",
+            "        batch_x, batch_y = batch_x.to(device), batch_y.to(device)",
+            "        optimizer.zero_grad()",
+            "        outputs = model(batch_x)",
+            "        loss = criterion(outputs, batch_y)",
+            "        loss.backward()",
+            "        optimizer.step()",
+            "        total_loss += loss.item() * batch_x.size(0)",
+            "    return total_loss / len(dataloader.dataset)",
+        },
+        i(0),
+    }),
+
+    s("plt_subplots", {
+        t {
+            "import matplotlib.pyplot as plt",
+            "import seaborn as sns",
+            "",
+            "sns.set_theme(style='whitegrid')",
+            "fig, axes = plt.subplots(1, 2, figsize=(12, 5))",
+            "",
+            "axes[0].plot(x, y, label='Train')",
+            "axes[0].set_title('Loss Curve')",
+            "axes[0].set_xlabel('Epoch')",
+            "axes[0].set_ylabel('Loss')",
+            "axes[0].legend()",
+            "",
+            "plt.tight_layout()",
+            "plt.show()",
+        },
+        i(0),
+    }),
+
+    s("hf_pipeline", {
+        t {
+            "from transformers import pipeline",
+            "",
+            "pipe = pipeline('text-generation', model='meta-llama/Llama-3-8B')",
+            "result = pipe('Prompt here', max_new_tokens=100)",
+            "print(result)",
+        },
+        i(0),
+    }),
 })
